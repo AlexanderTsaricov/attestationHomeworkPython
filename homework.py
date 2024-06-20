@@ -17,11 +17,10 @@ random.shuffle(lst)
 data = pd.DataFrame({'whoAmI':lst})
 data.head()
 print(data['whoAmI'])
-humanOneHot = '01'
-robotOneHot = '10'
 
-data.loc[data['whoAmI'] == 'robot', 'whoAmI'] = robotOneHot
-data.loc[data['whoAmI'] == 'human', 'whoAmI'] = humanOneHot
-print('_______Заменили значения_______')
-print(data['whoAmI'])
-
+data.loc[data['whoAmI'] == 'human', 'isHuman'] = True
+data.loc[data['whoAmI'] != 'human', 'isHuman'] = False
+data.loc[data['whoAmI'] == 'robot', 'isRobot'] = True
+data.loc[data['whoAmI'] != 'robot', 'isRobot'] = False
+data.drop(columns='whoAmI', axis = 1, inplace= True)
+print(data.head(10))
